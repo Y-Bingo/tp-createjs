@@ -12,14 +12,54 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="<%= htmlWebpackPlugin.options.gameName %>" />
         <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.gameName %>" />
+
+        <meta name="full-screen" content="true" />
         <meta name="msapplication-starturl" content="./" />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="x5-fullscreen" content="true" />
+        <meta name="360-fullscreen" content="true" />
 
         <title><%= htmlWebpackPlugin.options.gameName %></title>
+        <style>
+            html,
+            body {
+                -ms-touch-action: none;
+                background: #888888;
+                padding: 0;
+                border: 0;
+                margin: 0;
+                height: 100%;
+            }
 
+            .create-js {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+                background: black;
+                position: relative;
+                text-align: center;
+                /* vertical-align: middle; */
+            }
+
+            #canvas {
+                /* display: block; */
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                cursor: pointer;
+                background: #111111;
+            }
+        </style>
     </head>
 
     <body>
-        <canvas id="stage" width="720" height="1080"></canvas>
+        <div class="create-js" data-entry-class="Main" >
+            <canvas id="canvas" width="720" height="1080" >你的浏览器不支持canvas，请更换</canvas>
+        </div>
         </script>
         <!-- built files will be auto injected -->
     </body>

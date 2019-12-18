@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "allowJs": true,
         "allowUnreachableCode": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

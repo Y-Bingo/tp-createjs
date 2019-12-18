@@ -1,9 +1,6 @@
-import * as config from "../resource/default.res.json";
+import "../libs/createjs/createjs.min.js";
 
-import "../libs/createjs/easelJS/easeljs.js";
-import "../libs/createjs/preloadJS/preloadjs.js";
-import "../libs/createjs/soundJS/soundjs.js";
-import "../libs/createjs/tweenJS/tweenjs.js";
+import config from "../resource/default.res.json";
 
 class Main {
     public show(): void {

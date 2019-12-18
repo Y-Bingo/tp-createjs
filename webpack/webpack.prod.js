@@ -12,7 +12,7 @@ const { CleanWebpackPlugin } = require( "clean-webpack-plugin" );
 
 const prod = {
     mode: 'production',
-    devtool: 'cheap-module-source-map',
+    // devtool: 'cheap-module-source-map',
     output: {
         path: utils.resolve( "bin-release/" ),
         filename: '[name].[hash].js',
