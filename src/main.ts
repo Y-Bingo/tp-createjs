@@ -1,8 +1,11 @@
 import "../libs/createjs/easeljs.js";
+import "../libs/createjs/tweenjs.js";
 
 import core from "./core";
 import ShapePreloadUI from "./cui/ShapePreloadUI";
-import ShapeButton from "./cui/ShapeButton";
+
+import CircleTween from "./demo/CircleTween";
+import BaseContainer from "./cui/BaseContainer";
 
 class Main {
 
@@ -19,11 +22,17 @@ class Main {
     private _initPreload(): void {
         this._preloadUI = new ShapePreloadUI( "#FFF", "#5e5e5e" );
         core.STAGE.addChild( this._preloadUI );
+
+        // console.log( this._preloadUI.width, this._preloadUI.height );
+
+        this._createScene();
     }
 
     /** 创建场景 */
     private _createScene(): void {
-
+        let circleTween = new CircleTween;
+        core.STAGE.addChild( circleTween );
+        // circleTween.setBounds(x, y, width, height)
     }
 
     private _onTick( evt: Object ): void {
