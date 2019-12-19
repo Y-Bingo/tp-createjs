@@ -25,7 +25,7 @@ module.exports = {
                 loader: 'ts-loader'
             },
             {
-                test: /(easeljs|preloadjs|tweenjs|soundjs|createjs)\.min\.js$/,
+                test: /(easeljs|preloadjs|tweenjs|soundjs|createjs)(\.min)?\.js$/,
                 loader: 'imports-loader?this=>window!exports-loader?window.createjs',
             },
             {

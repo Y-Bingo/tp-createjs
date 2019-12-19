@@ -1,20 +1,35 @@
-import "../libs/createjs/createjs.min.js";
+import "../libs/createjs/easeljs.js";
 
-import config from "../resource/default.res.json";
+import core from "./core";
+import ShapePreloadUI from "./cui/ShapePreloadUI";
+import ShapeButton from "./cui/ShapeButton";
 
 class Main {
-    public show(): void {
-        console.log( "hello world" );
-        console.log( config );
-        this._log();
+
+    private _preloadUI: ShapePreloadUI;
+
+    constructor () {
+        createjs.Ticker.on( 'tick', this._onTick );
+        core.STAGE.enableMouseOver();
+
+        this._initPreload();
     }
-    private _log() {
-        console.log( "createjs", createjs.Stage );
-        console.log( "preload", createjs.LoadQueue );
-        console.log( "preload", createjs.Sound );
-        console.log( "preload", createjs.Tween );
+
+    /** 初始化进度条 */
+    private _initPreload(): void {
+        this._preloadUI = new ShapePreloadUI( "#FFF", "#5e5e5e" );
+        core.STAGE.addChild( this._preloadUI );
+    }
+
+    /** 创建场景 */
+    private _createScene(): void {
+
+    }
+
+    private _onTick( evt: Object ): void {
+        core.STAGE.update( evt );
     }
 }
 
-( new Main() ).show();
+new Main();
 

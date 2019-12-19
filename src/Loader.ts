@@ -5,6 +5,10 @@ interface IConfig {
 
 }
 
+interface IProgressObj {
+    onProgress: ( eventObj: Object ) => void;
+}
+
 export default class Loader {
 
     private static _ins: Loader;
@@ -22,16 +26,17 @@ export default class Loader {
     // 回调参数
     private _args: any;
     // 进度对象
-    private _progressObj: any;
+    private _progressObj: IProgressObj;
 
     constructor () {
-        createjs.LoadQueue;
         this._loadQueue = new createjs.LoadQueue();
-        this._loadQueue.addEventListener( "complete", this._onComplete.bind( this ) );
-        this._loadQueue.addEventListener( "progress", this._onProgress.bind( this ) );
+        this._loadQueue.on( "complete", this._onComplete );
+        this._loadQueue.on( "progress", this._onProgress );
+        this._loadQueue.on( "error", this._onError );
     }
 
-    loadConfig( config: IConfig, callback?: any, obj?: any, args?: any ) {
+    /** 加载 miniFest文件 */
+    loadConfig( config: IConfig, callback?: any, obj?: any, args?: any ): void {
         this._callBack = callback || null;
         this._callObj = obj || null;
         this._args = args || null;
@@ -40,13 +45,13 @@ export default class Loader {
     }
 
     // 设置加载进度
-    setLoadProgress( progressObj ) {
+    setLoadProgress( progressObj: IProgressObj ): void {
         this._progressObj = progressObj || null;
     }
 
     // 获取资源
-    getRes( resName: string ) {
-        return this._loadQueue.getResult( resName ) || null;
+    getRes( value?: any, rawResult?: boolean ) {
+        return this._loadQueue.getResult( value, rawResult ) || null;
     }
 
     private _onComplete() {
@@ -57,9 +62,12 @@ export default class Loader {
         this._args = null;
     }
 
-    private _onProgress( e ) {
+    private _onProgress( eventObj: Object ) {
         if ( !this._progressObj || !this._progressObj.onProgress ) return;
-        this._progressObj.onProgress( e );
+        this._progressObj.onProgress( eventObj );
     }
 
+    private _onError( eventObj: Object ): void {
+        console.error( "加载失败！", event );
+    }
 }

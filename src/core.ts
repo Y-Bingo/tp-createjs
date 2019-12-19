@@ -1,57 +1,66 @@
 /**
  * 游戏配置 以及初始化环境
  */
-/**canvas */
-export const CVS = document.querySelector( "#canvas" ) as HTMLCanvasElement;
-/** 游戏宽度 */
-export const STAGE_WIDTH = CVS.width;
-/*  游戏宽度*/
-export const STAGE_HEIGHT = CVS.height;
+module core {
 
-/**游戏舞台 */
-export const STAGE = new createjs.Stage( CVS );
+    /**canvas */
+    export const CVS = document.querySelector( "#canvas" ) as HTMLCanvasElement;
+    /** 游戏宽度 */
+    export const STAGE_WIDTH: number = CVS.width;
+    /*  游戏宽度*/
+    export const STAGE_HEIGHT: number = CVS.height;
+    /**游戏舞台 */
+    export const STAGE = new createjs.Stage( CVS );
 
-// 适配方案
+    // 适配方案
+    let designWidth: number = CVS.width; // 设计宽度为640
 
-let designWidth = 640; // 设计宽度为640
+    let designHeight: number = CVS.height; // 设计高度为1136
 
-let designHeight = 1136; // 设计高度为1136
+    let viewWidth = document.documentElement.clientWidth; // 获取浏览器可视区域宽度
 
-let viewWidth = document.documentElement.clientWidth; // 获取浏览器可视区域宽度
+    let viewHeight = document.documentElement.clientHeight; // 获取浏览器可视区域高度
 
-let viewHeight = document.documentElement.clientHeight; // 获取浏览器可视区域高度
+    // let mmScale = designWidth / designHeight;       // 设计宽高比
+    // let scale = viewWidth / designWidth;            // 缩放因子
+    // CVS.width = designWidth;
+    // CVS.height = designHeight;
 
-// let mmScale = designWidth / designHeight;       // 设计宽高比
-// let scale = viewWidth / designWidth;            // 缩放因子
+    setSize( CVS, designWidth, designHeight, viewWidth, viewHeight );
+    window.onresize = onResize;
 
-CVS.width = designWidth;
-CVS.height = designHeight;
-
-// canvas.style.width = viewWidth + "px";
-
-// canvas.style.height = viewHeight / scale+ "px";
-
-setStage( CVS, designWidth, designHeight, viewWidth, viewHeight );
-window.onresize = function ( e ) {
-    let vw = document.documentElement.clientWidth;
-    let vh = document.documentElement.clientHeight;
-    setStage( CVS, designWidth, designHeight, vw, vh );
-    // console.log( designWidth, designHeight, viewWidth, viewHeight );
-};
-
-function setStage( cav, dw, dh, vw, vh ) {
-    let ds = dw / dh;
-    let vs = vw / vh;
-
-    let nw = 0, nh = 0;
-    if ( vs > ds ) {
-        nw = Math.ceil( vh * ds );
-        nh = vh;
-    } else if ( vs <= ds ) {
-        nw = vw;
-        nh = Math.ceil( vw / ds );
+    function onResize( this: GlobalEventHandlers, ev: UIEvent ): void {
+        let vw = document.documentElement.clientWidth;
+        let vh = document.documentElement.clientHeight;
+        setSize( core.CVS, designWidth, designHeight, vw, vh );
     }
 
-    cav.style.width = nw + "px";
-    cav.style.height = nh + "px";
+    /**
+     * 设置size
+     * @param cav   canvas 对象
+     * @param dw    设计宽度   
+     * @param dh    设计高度
+     * @param sw    屏幕宽度
+     * @param sh    屏幕高度
+     */
+    function setSize( cav: HTMLCanvasElement, dw: number, dh: number, sw: number, sh: number ): void {
+        let ds = dw / dh;
+        let vs = sw / sh;
+
+        let nw = 0, nh = 0;
+        if ( vs > ds ) {
+            nw = Math.ceil( sh * ds );
+            nh = sh;
+        } else if ( vs <= ds ) {
+            nw = sw;
+            nh = Math.ceil( sw / ds );
+        }
+
+        cav.style.width = nw + "px";
+        cav.style.height = nh + "px";
+
+        console.log( "执行一次" );
+    }
 }
+
+export default core;
