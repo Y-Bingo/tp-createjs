@@ -8,6 +8,7 @@
         "target": "ES2016",
         "sourceMap": true,
         "strict": false,
+        "esModuleInterop": true,
         "typeRoots": [
             "node_modules/@types",
             "libs/@types"

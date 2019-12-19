@@ -1,4 +1,4 @@
-import "../libs/createjs/createjs.min.js";
+import "../libs/createjs/easeljs.js";
 
 import config from "../resource/default.res.json";
 
