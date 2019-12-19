@@ -12,7 +12,11 @@ export default class BaseContainer extends createjs.Container {
 
     /** 组件宽度 */
     get width(): number {
-        this._width = this.getBounds().width;
+        let rect = this.getBounds();
+
+        if ( !rect ) return 0;
+
+        this._width = rect.width;
         return this._width;
     }
     /** 组件宽度 */
@@ -28,7 +32,12 @@ export default class BaseContainer extends createjs.Container {
 
     /** 组件高度 */
     get height(): number {
-        return this.getBounds().height;
+        let rect = this.getBounds();
+
+        if ( !rect ) return 0;
+
+        this._height = rect.height;
+        return this._height;
     }
     /** 组件高度 */
     set height( value ) {
@@ -78,8 +87,9 @@ export default class BaseContainer extends createjs.Container {
 
     /** 事件添加 */
     protected $removeEvent(): void {
-        this.off( "added", this.$onAdd );
-        this.off( "removed", this.$onRemove );
+        this.removeAllEventListeners();
+        // this.removeEventListener( "added", this.$onAdd );
+        // this.removeEventListener( "removed", this.$onRemove );
     }
 
     /** 刷新 */
