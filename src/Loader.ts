@@ -6,7 +6,11 @@ interface IConfig {
 }
 
 interface IProgressObj {
-    onProgress: ( eventObj: Object ) => void;
+    onProgress: ( eventObj: IProgressEvent ) => void;
+}
+
+interface IProgressEvent {
+    progress: number;
 }
 
 export default class Loader {
@@ -30,16 +34,23 @@ export default class Loader {
 
     constructor () {
         this._loadQueue = new createjs.LoadQueue();
-        this._loadQueue.on( "complete", this._onComplete );
-        this._loadQueue.on( "progress", this._onProgress );
-        this._loadQueue.on( "error", this._onError );
+        this._loadQueue.on( "complete", this._onComplete, this );
+        this._loadQueue.on( "progress", this._onProgress, this );
+        this._loadQueue.on( "error", this._onError, this );
     }
 
     /** 加载 miniFest文件 */
-    loadConfig( config: IConfig, callback?: any, obj?: any, args?: any ): void {
+    loadConfig( config: IConfig[], callback?: any, obj?: any, args?: any ): void {
         this._callBack = callback || null;
         this._callObj = obj || null;
         this._args = args || null;
+
+        if ( !config || !config.length ) {
+            this._onProgress( { progress: 1 } );
+            this._onComplete();
+            console.warn( "加载配置失败！", config );
+            return;
+        }
 
         this._loadQueue.loadManifest( config );
     }
@@ -62,7 +73,7 @@ export default class Loader {
         this._args = null;
     }
 
-    private _onProgress( eventObj: Object ) {
+    private _onProgress( eventObj: IProgressEvent ) {
         if ( !this._progressObj || !this._progressObj.onProgress ) return;
         this._progressObj.onProgress( eventObj );
     }

@@ -82,7 +82,7 @@ export default class BaseContainer extends createjs.Container {
 
     /** 移出舞台 */
     protected $onRemove(): void {
-        this.$onRemove();
+        this.$removeEvent();
     }
 
     /** 事件添加 */
