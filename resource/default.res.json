@@ -1,3 +1,18 @@
-{
-    "a": "1"
-}
+[
+    {
+        "id": "runner",
+        "src": "resource/assets/runningMan.png"
+    },
+    {
+        "id": "frank",
+        "src": "resource/assets/frank.png"
+    },
+    {
+        "id": "villager1",
+        "src": "resource/assets/villager1.png"
+    },
+    {
+        "id": "villager2",
+        "src": "resource/assets/villager2.png"
+    }
+]
