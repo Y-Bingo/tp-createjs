@@ -61,7 +61,7 @@ export default class Loader {
     }
 
     // 获取资源
-    getRes( value?: any, rawResult?: boolean ) {
+    getRes( value?: any, rawResult?: boolean ): Object {
         return this._loadQueue.getResult( value, rawResult ) || null;
     }
 
