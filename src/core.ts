@@ -12,6 +12,12 @@ module core {
     /**游戏舞台 */
     export const STAGE = new createjs.Stage( CVS );
 
+    /** 屏幕宽度 */
+    export let SCREEN_WIDTH = STAGE_WIDTH;
+
+    /** 屏幕高度 */
+    export let SCREEN_HEIGHT = STAGE_HEIGHT;
+
     // 适配方案
     let designWidth: number = CVS.width; // 设计宽度为640
 
@@ -58,6 +64,9 @@ module core {
 
         cav.style.width = nw + "px";
         cav.style.height = nh + "px";
+
+        SCREEN_WIDTH = nw;
+        SCREEN_HEIGHT = nh;
 
         console.log( "执行一次" );
     }
