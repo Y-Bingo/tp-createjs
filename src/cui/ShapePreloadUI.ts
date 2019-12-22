@@ -44,6 +44,7 @@ export default class ShapePreloadUI extends BaseContainer {
         this.bar = bar;
 
         this.addChild( bar, outline );
+        this.setBounds( 0, 0, PROGRESS_WIDTH, PROGRESS_HEIGHT );
     }
 
     private _updateProgress( progress ) {

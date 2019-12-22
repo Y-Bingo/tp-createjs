@@ -1,3 +1,46 @@
-{
-    "a": "1"
-}
+[
+    {
+        "id": "bg",
+        "src": "resource/assets/bg.jpg"
+    },
+    {
+        "id": "pot_1",
+        "src": "resource/assets/pot1.png"
+    },
+    {
+        "id": "pot_2",
+        "src": "resource/assets/pot2.png"
+    },
+    {
+        "id": "stayCat",
+        "src": "resource/assets/stay.png"
+    },
+    {
+        "id": "crazyCat",
+        "src": "resource/assets/weizhu.png"
+    },
+    {
+        "id": "btn_start",
+        "src": "resource/assets/btn_start.png"
+    },
+    {
+        "id": "btn_share",
+        "src": "resource/assets/btn_share.png"
+    },
+    {
+        "id": "btn_again",
+        "src": "resource/assets/btn_again.png"
+    },
+    {
+        "id": "failed_panel_bg",
+        "src": "resource/assets/failed.png"
+    },
+    {
+        "id": "win_panel_bg",
+        "src": "resource/assets/victory.png"
+    },
+    {
+        "id": "more",
+        "src": "resource/assets/more.png"
+    }
+]
